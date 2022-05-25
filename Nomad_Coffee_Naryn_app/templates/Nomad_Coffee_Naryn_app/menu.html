@@ -1,0 +1,54 @@
+{% extends 'Nomad_Coffee_Naryn_app/index.html' %}
+{% block title %}Меню{% endblock %}
+
+{% block content %}
+
+            <div id="drink" class="tm-page-content">
+            <!-- Drink Menu Page -->
+            <nav class="tm-black-bg tm-drinks-nav">
+
+              <ul>
+                <li>
+                  <a  href="#"  {% if not category %} class="tm-tab-link active" {% endif %} data-id="{{ category }}">Все </a>
+                </li>
+
+                {% for category in menu_cat %}
+                {% if category.slug == category.slug %} <li class="tm-tab-link active"> {% endif %}
+                  <a href="{{ menu_info.category.get_absolute_url }}"    data-id="{{ category }}">{{ category.product_cat_name }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+
+                {% if category %}
+                <li>
+                  <a href="{{ category.get_absolute_url }}"  class="tm-tab-link active" data-id="{{ category }}">{{ category.product_cat_name }}Меню {% else %}</a>{% endif %}
+                </li>
+            </nav>
+
+
+            <div id="{{ menu_info.category }}" class="tm-tab-content">
+                 {% for menu_info in menu %}
+                <div class="tm-list">
+                  <div class="tm-list-item">
+                      {% if menu_info.product_image %}
+                    <img src="{{ menu_info.product_image.url }}" alt="Image" class="tm-list-item-img">
+                      {% endif %}
+                    <div class="tm-black-bg tm-list-item-text">
+                      <h3 class="tm-list-item-name">{{menu_info.title}}| <a href="#">{{ menu_info.category}}</a><span class="tm-list-item-price">{{menu_info.price}}с.</span></h3>
+                      <p class="tm-list-item-description">{{menu_info.description}}</p>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+
+
+              </div>
+            </div>
+
+
+            <div class="social_icon">
+              <h3>Поделиться ссылкой</h3>
+              <div class="ya-share2" data-curtain data-size="l" data-limit="6" data-services="vkontakte,facebook,telegram,twitter,whatsapp"></div>
+            </div>
+
+{% endblock %}

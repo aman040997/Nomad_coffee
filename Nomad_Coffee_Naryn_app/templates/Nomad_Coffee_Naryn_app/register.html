@@ -1,0 +1,32 @@
+{% extends 'Nomad_Coffee_Naryn_app/index.html' %}
+{% load static %}
+
+{% block content %}
+        <div class="tm-black-bg tm-contact-form-container tm-align-right">
+              <form action="" method="POST" id="contact-form">
+                  {% csrf_token %}
+                <div class="tm-form-group">
+                  <input type="text" name="name" class="tm-form-control" placeholder="Логин" required="" />
+                </div>
+                <div class="tm-form-group">
+                  <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+                </div>
+                <div class="tm-form-group tm-mb-30">
+                  <input type="password" name="password" class="tm-form-control" placeholder="Пароль">
+                </div>
+                   <div class="tm-form-group tm-mb-30">
+                  <input type="password" name="password2" class="tm-form-control" placeholder="Повторите пароль">
+                </div>
+                <div>
+                    <button type="submit" class="tm-btn-primary tm-align-right"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                    Регистрация
+                  </button>
+                </div>
+              </form>
+            </div>
+                    {% if error %}
+                    <div style="color:red;">{{ error }}</div>
+                    {% endif %}
+        </div>
+
+{% endblock %}

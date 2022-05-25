@@ -1,0 +1,50 @@
+{% extends 'Nomad_Coffee_Naryn_app/index.html' %}
+
+
+{% block content %}
+
+<!-- Contact Page -->
+          <div id="contact" class="tm-page-content">
+            <div class="tm-black-bg tm-contact-text-container">
+              <h2 class="tm-text-primary">КОНТАКТНАЯ ИНФОРМАЦИЯ</h2>
+              <b>Nomad Coffee Naryn</b>
+                <br>Naryn, Kyrgyzstan
+                <br>Нарын, Нарынская область
+
+                  <ul>
+                    <i class="fa fa-map-marker" aria-hidden="true"><a href="https://www.google.com/maps?ll=41.428434,75.999654&z=16&t=m&hl=ru&gl=KG&mapclient=embed&cid=11164757163675421456"> ул. Ленина 70-10А</a></i><br>
+                    <i class="fa fa-phone" aria-hidden="true"><b> Телефон: </b> <a href="tel:+996704580302">+996 704 58 03 02</a></i><br>
+                    <i class="fa fa-envelope" aria-hidden="true"><b> Эл. почта: </b> <a href="mailto:okazakbaev@gmail.com ">okazakbaev@gmail.com </a></i><br>
+                  </ul>
+
+
+                  <h3>Поделиться ссылкой</h3>
+                  <div class="ya-share2" data-curtain data-size="l" data-limit="6" data-services="vkontakte,facebook,telegram,twitter,whatsapp"></div>
+                <br><div>
+                  <iframe class="map_special" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1495.7545390961056!2d76.0002599!3d41.4281743!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38906bda3bfe08a5%3A0x9af12f7ca85f0b10!2sNomad%20Coffee!5e0!3m2!1sru!2skg!4v1652623376434!5m2!1sru!2skg" width="500px" height="500px" tyle="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                </div>
+            </div>
+
+            <div class="tm-black-bg tm-contact-form-container tm-align-right">
+                 <h2>Связаться с нами</h2>
+
+              <form action="." method="POST" id="contact-form">
+                  {% csrf_token %}
+                  {{ form.full_name }}
+                  {{ form.email }}
+                  {{ form.phone_number }}
+                  {{ form.message }}
+                <br>
+
+                <div>
+                  <button type="submit" class="tm-btn-primary tm-align-right">
+                    Отправит сообщения
+                  </button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+</div>
+          <!-- end Contact Page -->
+{% endblock %}

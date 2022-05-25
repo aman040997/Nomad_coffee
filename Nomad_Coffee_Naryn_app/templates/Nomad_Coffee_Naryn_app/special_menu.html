@@ -1,0 +1,31 @@
+{% extends 'Nomad_Coffee_Naryn_app/index.html' %}
+
+
+{% block content %}
+
+<!-- Special Items Page -->
+
+          <div id="special" class="tm-page-content">
+            <div class="tm-special-items">
+              <div class="tm-black-bg tm-about-box-2">
+                {% for menu in base_menu %}
+
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">{{ menu.title_menu}}</h2>
+                  <div class="img_div"><img src="{{ menu.image_menu.url }}" alt="Image" class="img_special"></div>
+                  <p class="tm-special-item-text">{{ menu.text_menu }}</p>
+                </div><br>
+                  {% endfor %}
+
+                <script src="https://yastatic.net/share2/share.js"></script>
+                  <div class="social_icon">
+                    <h3>Поделиться ссылкой</h3>
+                    <div class="ya-share2" data-curtain data-size="l" data-limit="6" data-services="vkontakte,facebook,telegram,twitter,whatsapp"></div>
+                  </div>
+
+              </div>
+
+            </div>
+          </div>
+          <!-- end Special Items Page -->
+{% endblock %}

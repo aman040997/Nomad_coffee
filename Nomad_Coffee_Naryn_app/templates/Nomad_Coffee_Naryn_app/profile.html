@@ -1,0 +1,57 @@
+{% extends 'Nomad_Coffee_Naryn_app/index.html' %}
+{% load static %}
+
+    {% block content %}
+         <div class="tm-black-bg tm-contact-form-container tm-align-right">
+
+        {% if user_form.errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <div id="form_errors">
+                    {% for key, value in user_form.errors.items %}
+                        <strong>{{ value }}</strong>
+                    {% endfor %}
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <div class="form-content">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <div class="tm-form-group">
+
+                             <div class="img_div">
+                                 <img  src="{{ user.profile.avatar.url }}" width="250" height="250" style="cursor: pointer; border-radius: 20px;"/>
+                             </div><br>
+                            <label class="small mb-1">Логин: </label>
+                                {{ user_form.username }}<br>
+
+                            <label class="small mb-1">Пароль: </label><br>
+                            <a href="{% url 'password_change' %}"><i class="fa fa-key" aria-hidden="true"></i>**** Изменить текущий пароль: </a>
+                            <hr><br>
+                            <label class="small mb-1">Email: </label>
+                                {{ user_form.email }}
+                        </div>
+                        <div class="form-group">
+
+                            <label class="form-control mb-1"><i class="fa fa-picture-o" aria-hidden="true"></i>  Заменить аватар: {{ profile_form.avatar }} </label><br><br>
+                            <label class="small mb-1">Имя: </label><br> {{ user_form.first_name }}<br>
+                            <label class="small mb-1">Фамилия: </label><br> {{ user_form.last_name }}<br>
+
+
+                        </div><br>
+                        <label class="small mb-1">Автобиография: </label> {{ profile_form.bio }}
+                        </div>
+                </div>
+                <br><br>
+                <button type="submit" class="tm-btn-primary tm-align-right">Сохранть изменения</button>
+                <button type="reset" class="tm-btn-primary tm-align-right">Reset</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

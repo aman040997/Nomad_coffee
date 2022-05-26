@@ -19,11 +19,18 @@ from .models import *
 from .forms import *
 from django.db.models import Q
 
+class NewsList(generic.ListView):
+    queryset = News_coffee.objects.all()
+    template_name = 'Nomad_Coffee_Naryn_app/index.html'
+
+class NewsDetail(generic.DetailView):
+    model = News_coffee
+    template_name = 'Nomad_Coffee_Naryn_app/news_detail.html'
 
 def index(request):
     base_menu = BaseMenu.objects.all()
-
-    return render(request, 'Nomad_Coffee_Naryn_app/index.html', {"base_menu": base_menu})
+    news = News_coffee.objects.all()
+    return render(request, 'Nomad_Coffee_Naryn_app/index.html', {"base_menu": base_menu, "news": news})
 
 
 def menu(request, category_slug=None):
@@ -143,6 +150,3 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
 
 
 
-class MenuDetailView(DetailView):
-    model = Menu
-    query_pk_and_slug = True

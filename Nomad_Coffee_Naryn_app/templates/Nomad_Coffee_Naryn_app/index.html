@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Nomad Coffee Naryn{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}"> <!-- https://fontawesome.com/ -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/tooplate-wave-cafe.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -64,13 +64,40 @@
 
       <div class="tm-right">
         <main class="tm-main">
+
             {% block content %}
 
+
+
+            <div id="#" class="tm-tab-content">
+
+
+
+                <div class="tm-list">
+                    <h1 style="color:white; align-text:center;">Новости</h1>
+                    {% for new in news %}
+                  <div class="tm-list-item">
+                      {% if new.news_image %}
+                    <img src="{{ new.news_image.url }}" alt="Image" class="tm-list-item-img">
+                      {% endif %}
+                    <div class="tm-black-bg tm-list-item-text">
+                      <h4 class="tm-list-item-name"><a href="#"></a>{{ new.title|slice:":50" }} ... <a href="#"></a><span class="tm-list-item-price"></span></h4>
+                      <p class="tm-list-item-description">{{ new.description|slice:":100" }} ... </p>
+                        <span>Автор: <i>{{ new.author }}</i></span>
+                        <br><span>Опубликовано: <i>{{ new.updated }}</i></span>
+                    </div>
+
+                  </div>
+                  {% endfor %}
+
+              </div>
+            </div>
 
 
 
 
             {% endblock %}
+
         </main>
       </div>
     </div>

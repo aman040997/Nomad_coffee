@@ -1,0 +1,30 @@
+{% extends 'Nomad_Coffee_Naryn_app/base.html' %}
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+
+
+<div id="news" class="tm-page-content">
+            {% for news_detail in news %}
+            <div class="tm-black-bg tm-mb-20 tm-about-box-1">
+              <div class="tm-list-item tm-list-item-2">
+                <div class="tm-list-item-text-2">
+                  <h2 class="tm-text-primary"></h2>
+                    <div class="img_div"><img class="img_special" src="{% static 'img/author.jpg' %}" alt="Image"></div><br>
+
+                    <p></p>
+
+                    <div class="social_icon">
+                        <h3>Поделиться ссылкой</h3>
+                        <div class="ya-share2" data-curtain data-size="l" data-limit="6" data-services="vkontakte,facebook,telegram,twitter,whatsapp"></div>
+                      </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+{% endblock %}

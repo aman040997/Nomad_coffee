@@ -8,7 +8,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-#from django_extensions.db.fields import AutoSlugField
+
 
 
 class CatMenu(models.Model):
@@ -45,6 +45,7 @@ class BaseMenu(models.Model):
         return self.title_menu
 
 
+
 class ContactForm(models.Model):
     class Meta():
         verbose_name = 'Сообщения от пользователя'
@@ -58,6 +59,8 @@ class ContactForm(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
 
 class Menu_Category(models.Model):
     class Meta():
@@ -90,17 +93,40 @@ class Menu(models.Model):
     price = models.IntegerField(blank=True)
 
 
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Menu, self).save(*args, **kwargs)
-
-        def get_absolute_url(self):
+    def get_absolute_url(self):
             return reverse('Nomad_Coffee_Naryn_app:menu_category',
                            args=[self.id, self.slug])
 
     def __str__(self):
         return self.title
+
+
+
+STATUS = (
+    (0,"Draft"),
+    (1,"Publish")
+)
+
+
+class News_coffee(models.Model):
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'Новости'
+        verbose_name_plural = 'Новости'
+
+    title = models.CharField(max_length=100, blank=True, null=True, verbose_name='Заголовок')
+    slug = models.SlugField(unique=True, db_index=True, blank=True, verbose_name='slug')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')
+    news_image = models.ImageField(upload_to='image/news_image/%Y/%m/%d/', verbose_name='фото заголовоки', blank=True)
+    description = models.CharField(max_length=200, blank=True, verbose_name='Описание')
+    text = models.TextField(blank=True, verbose_name='Текст')
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
+
+    def __str__(self):
+        return self.title
+
 
 
 class Profile(models.Model):
@@ -126,6 +152,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
 
 # resizing images
 def save(self, *args, **kwargs):

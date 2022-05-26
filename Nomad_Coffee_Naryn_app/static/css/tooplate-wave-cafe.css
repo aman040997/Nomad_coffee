@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     overflow-x: hidden;
     background-color: #1E5050;
 }
@@ -165,8 +165,8 @@ h2 {
 
 .tm-list-item-img {
     margin-right: 20px;
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 200px;
     background-color: #099;
 }
 

@@ -1,0 +1,208 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Nomad Coffee Naryn{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link rel="stylesheet" href="{% static 'css/tooplate-wave-cafe.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+  <div class="tm-container">
+    <div class="tm-row">
+      <!-- Site Header -->
+      <div class="tm-left">
+        <div class="tm-left-inner">
+          <div class="header_logo">
+            <img src="{% static 'img/nomad_logo.jpg' %}" alt="logo">
+            <!--<h1 class="tm-site-name">Nomad Coffee Naryn</h1>-->
+          </div>
+          <nav class="tm-site-nav">
+            <ul class="tm-site-nav-ul">
+              <li class="tm-page-nav-item">
+                <a href="{% url 'menu' %}" class="tm-page-link">
+                  <i class="fas fa-mug-hot tm-page-link-icon"></i>
+                  <span>Меню</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="{% url 'about' %}" class="tm-page-link">
+                  <i class="fas fa-users tm-page-link-icon"></i>
+                  <span>О нас</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="{% url 'special_menu' %}" class="tm-page-link">
+                  <i class="fas fa-glass-martini tm-page-link-icon"></i>
+                  <span>Основные меню</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="{% url 'contact' %}" class="tm-page-link">
+                  <i class="fas fa-comments tm-page-link-icon"></i>
+                  <span>Контакты</span>
+                </a>
+              </li>
+
+            <li class="tm-page-nav-item">
+              <div class="tm-black-bg"> {% if not user.is_authenticated %}<a href="{% url 'login' %}" > <i class="fa fa-sign-in" aria-hidden="true"></i>  Войти</a> | <a href="{% url 'register' %}"> <i class="fa fa-user-plus" aria-hidden="true"></i> Регистрация </a>
+              {% else %} Добро пожаловать:<a href="{% url 'userpage' %}"> __ <i class="fa fa-user" aria-hidden="true">__{{ user.username }}</i></a> --->>> <a href="{% url 'logout' %}">Выйти </a></div>{% endif %}
+                </li>
+            </ul>
+              <br>
+          </nav>
+        </div>
+      </div>
+
+
+      <div class="tm-right">
+        <main class="tm-main">
+            {% block content %}
+
+
+
+
+
+            {% endblock %}
+        </main>
+      </div>
+    </div>
+
+
+
+    <footer class="tm-site-footer" >
+      <p class="tm-black-bg tm-footer-text">Copyright 2022
+
+      |<a href="#" class="tm-footer-link" rel="sponsored" target="_parent">Nomad Coffee Naryn</a></p>
+    </footer>
+  </div>
+
+  <!-- Background video -->
+  <div class="tm-video-wrapper">
+      <i id="tm-video-control-button" class="fas fa-pause"></i>
+      <video autoplay muted loop id="tm-video">
+          <source src="{% static 'video/naryn_obzor.mp4' %}" type="video/mp4">
+      </video>
+  </div>
+
+  <script src="https://yastatic.net/share2/share.js"></script>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+  <script>
+
+    function setVideoSize() {
+      const vidWidth = 1920;
+      const vidHeight = 1080;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const tempVidWidth = windowHeight * vidWidth / vidHeight;
+      const tempVidHeight = windowWidth * vidHeight / vidWidth;
+      const newVidWidth = tempVidWidth > windowWidth ? tempVidWidth : windowWidth;
+      const newVidHeight = tempVidHeight > windowHeight ? tempVidHeight : windowHeight;
+      const tmVideo = $('#tm-video');
+
+      tmVideo.css('width', newVidWidth);
+      tmVideo.css('height', newVidHeight);
+    }
+
+
+
+
+      /************** Video background *********/
+
+      setVideoSize();
+
+      // Set video background size based on window size
+      let timeout;
+      window.onresize = function(){
+        clearTimeout(timeout);
+        timeout = setTimeout(setVideoSize, 100);
+      };
+
+      // Play/Pause button for video background
+      const btn = $("#tm-video-control-button");
+
+      btn.on("click", function(e) {
+        const video = document.getElementById("tm-video");
+        $(this).removeClass();
+
+        if (video.paused) {
+          video.play();
+          $(this).addClass("fas fa-pause");
+        } else {
+          video.pause();
+          $(this).addClass("fas fa-play");
+        }
+      });
+    });
+
+  </script>
+</body>
+</html>
+
+
+
+<!--
+    function openTab(evt, id) {
+      $('.tm-tab-content').hide();
+      $('#' + id).show();
+      $('.tm-tab-link').removeClass('active');
+      $(evt.currentTarget).addClass('active');
+    }
+
+    function initPage() {
+      let pageId = location.hash;
+
+      if(pageId) {
+        highlightMenu($(`.tm-page-link[href^="${pageId}"]`));
+        showPage($(pageId));
+      }
+      else {
+        pageId = $('.tm-page-link.active').attr('href');
+        showPage($(pageId));
+      }
+    }
+
+    function highlightMenu(menuItem) {
+      $('.tm-page-link').removeClass('active');
+      menuItem.addClass('active');
+    }
+
+    function showPage(page) {
+      $('.tm-page-content').hide();
+      page.show();
+    }
+
+    $(document).ready(function(){
+
+      /***************** Pages *****************/
+
+      initPage();
+
+      $('.tm-page-link').click(function(event) {
+
+        if(window.innerWidth > 991) {
+          event.preventDefault();
+        }
+
+        highlightMenu($(event.currentTarget));
+        showPage($(event.currentTarget.hash));
+      });
+
+
+      /***************** Tabs *******************/
+
+      $('.tm-tab-link').on('click', e => {
+        e.preventDefault();
+        openTab(e, $(e.target).data('id'));
+      });
+
+      $('.tm-tab-link.active').click(); // Open default tab
+-->
